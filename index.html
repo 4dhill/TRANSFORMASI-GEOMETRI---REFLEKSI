@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Transformasi Geometri – Refleksi (Pencerminan)</title>
+<style>
+:root{--b:#2f6bff;--p:#7c4dff;--n:#0b1b4d}*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,Roboto,Arial,sans-serif;background:#f3f6ff;color:#14214d;line-height:1.6}
+nav{position:sticky;top:0;z-index:50;background:var(--n);display:flex;gap:4px;padding:8px;overflow-x:auto}
+nav button{border:0;background:0;color:#cdd8ff;padding:8px 13px;border-radius:99px;cursor:pointer;white-space:nowrap;font-weight:600;transition:.2s}
+nav button:hover{background:#ffffff22}nav button.on{background:var(--b);color:#fff}
+.sec{display:none;max-width:1100px;margin:auto;padding:22px 14px}.sec.on{display:block;animation:fi .4s}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}}
+h2{color:var(--n);margin:.2em 0}.card{background:#fff;border-radius:20px;padding:18px;box-shadow:0 6px 24px #1b2f7a18;margin:14px 0}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.grid .card{margin:0}
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:center}
+.btn{border:0;border-radius:12px;padding:10px 18px;font-weight:700;cursor:pointer;background:var(--b);color:#fff;transition:.2s;margin:3px 2px;font-size:.95em}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px #2f6bff44}.btn.alt{background:var(--p)}.btn.ghost{background:#e6ecff;color:#1b2f7a}
+.hero{background:linear-gradient(135deg,#0b1b4d,#2347c9 60%,#7c4dff);color:#fff;border-radius:28px;padding:34px 22px;position:relative;overflow:hidden;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:center}
+.hero>*{position:relative}.hero h1{font-size:clamp(1.9rem,6vw,3.2rem);margin:.1em 0;line-height:1.1}.hero h2{color:#b9c8ff;letter-spacing:2px}
+.dot{position:absolute!important;border-radius:50%;background:#ffffff40;animation:fl 6s infinite ease-in-out}@keyframes fl{50%{transform:translateY(-26px) scale(1.5)}}
+svg.pl{width:100%;height:auto;max-width:600px;display:block;margin:auto;background:#fff;border-radius:16px;touch-action:none}
+.lab{display:grid;gap:14px;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}@media(max-width:850px){.lab{grid-template-columns:1fr}}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:end;margin:8px 0}label{font-size:.85em;font-weight:600;display:flex;flex-direction:column;gap:2px}
+select,input[type=number]{padding:7px;border:2px solid #d5deff;border-radius:10px;font-size:1em;width:100%;min-width:70px}input[type=range]{flex:1;min-width:120px}
+.mat{display:inline-block;border-left:2px solid var(--n);border-right:2px solid var(--n);border-radius:6px;padding:2px 6px;vertical-align:middle;margin:2px}.mat table{border-collapse:collapse}.mat td{padding:1px 7px;text-align:center}
+.rule{font-size:1.15em;font-weight:700;color:var(--b)}table.t{border-collapse:collapse;width:100%;font-size:.92em}.t td,.t th{border-bottom:1px solid #e3e9ff;padding:5px;text-align:left}
+.tag{padding:2px 10px;border-radius:99px;font-size:.8em;font-weight:700;color:#fff}.g{background:#16a34a}.y{background:#e6a100}.r{background:#e11d48}
+.hid{display:none;border-radius:12px;padding:10px 14px;margin-top:8px;background:#eef2ff}.hid.show{display:block;animation:fi .3s}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:11px 14px;border:2px solid #d5deff;border-radius:12px;background:#fff;cursor:pointer;font-size:1em;transition:.15s}.opt:hover{border-color:var(--b)}
+.opt.s{border-color:var(--b);background:#eaf0ff}.opt.c{border-color:#16a34a;background:#dcfce7}.opt.w{border-color:#e11d48;background:#ffe4e9}
+.bar{height:10px;background:#e3e9ff;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--b),var(--p));transition:.4s}
+.pop{animation:pop .5s}@keyframes pop{40%{transform:scale(1.03);box-shadow:0 0 0 6px #16a34a55}}
+.fx{position:absolute;font-size:1.6em;animation:up 1s forwards;pointer-events:none}@keyframes up{to{transform:translateY(-90px) rotate(40deg);opacity:0}}
+.av{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--b),var(--p));color:#fff;font-size:1.5em;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.pf{text-align:center}.small{font-size:.85em;color:#5b6896}.big{font-size:2.6em;font-weight:800;color:var(--b)}footer{text-align:center;padding:24px;color:#5b6896}
+li{margin:3px 0}
+</style></head><body>
+<nav id="nav"></nav>
+
+<section class="sec on" id="home"><div class="hero" id="hero"><div><small>MATEMATIKA TINGKAT LANJUT • KELAS XI SMA</small><h1>TRANSFORMASI GEOMETRI</h1><h2>REFLEKSI (PENCERMINAN)</h2><p>Eksplorasi Interaktif Materi Refleksi (Pencerminan). Pelajari bagaimana titik dan bangun datar “bercermin”, geser titiknya sendiri, dan lihat bayangannya berubah seketika.</p>
+<button class="btn" onclick="go('tujuan')">MULAI BELAJAR</button><button class="btn alt" onclick="go('lab')">COBA LABORATORIUM</button><p><b>Kelompok 4 XI.2</b> • Matematika Tingkat Lanjut</p></div><svg id="hsv" class="pl" viewBox="0 0 288 288"></svg></div>
+<div class="grid" style="margin-top:16px"><div class="card"><h3>📘 Materi Lengkap</h3><p>Dari konsep dasar sampai 7 jenis refleksi.</p><button class="btn ghost" onclick="go('materi')">Buka</button></div><div class="card"><h3>🧪 Laboratorium</h3><p>Seret titik &amp; bangun, bayangan dihitung otomatis.</p><button class="btn ghost" onclick="go('lab')">Buka</button></div><div class="card"><h3>📝 Kuis</h3><p>15 soal dengan skor dan evaluasi.</p><button class="btn ghost" onclick="go('kuis')">Buka</button></div><div class="card"><h3>🚀 Mission: Reflection</h3><p>Game 5 level melawan waktu.</p><button class="btn ghost" onclick="go('game')">Buka</button></div></div></section>
+
+<section class="sec" id="tujuan"><h2>🎯 Tujuan Pembelajaran</h2><p>Centang setiap tujuan yang sudah kamu kuasai.</p><div class="bar"><i id="tbar" style="width:0"></i></div><p class="small" id="ttxt"></p><div id="tlist"></div></section>
+
+<section class="sec" id="kenal"><h2>🪞 Pengenalan Refleksi</h2><div class="card"><p>Saat bercermin, bayanganmu tampak berjarak sama dengan dirimu di seberang cermin. Itulah <b>refleksi (pencerminan)</b>: transformasi geometri yang memindahkan setiap titik ke seberang suatu <b>garis cermin</b> dengan jarak yang sama. Contoh di sekitar kita: pantulan di air danau, kaca spion, dan motif batik simetris.</p></div>
+<div class="card two"><div><h3>Demo: geser titik A</h3><p>Cermin berupa sumbu Y (garis x = 0). Geser slider dan amati jarak A dan A′ ke cermin.</p><input type="range" id="dm" min="-5" max="5" step="0.5" value="3" style="width:100%"><p id="dmt"></p></div><svg id="dsv" class="pl" viewBox="0 0 264 264" style="max-width:300px"></svg></div>
+<div class="grid"><div class="card"><h3>Titik asal</h3><p>Titik semula, misal A(x, y).</p></div><div class="card"><h3>Titik bayangan</h3><p>Hasil pencerminan, ditulis A′(x′, y′).</p></div><div class="card"><h3>Garis cermin</h3><p>Garis (atau titik) yang menjadi pusat pencerminan.</p></div></div></section>
+
+<section class="sec" id="materi"><h2>📘 Materi Lengkap</h2>
+<div class="card"><h3>1. Pengertian Refleksi</h3><ul><li><b>Refleksi</b> adalah transformasi yang memindahkan setiap titik pada bidang ke bayangannya dengan sifat pencerminan.</li><li>Titik semula disebut <b>titik asal</b> (A), hasilnya <b>titik bayangan</b> (A′).</li><li><b>Garis cermin</b> adalah garis yang menjadi acuan pencerminan.</li><li>Jarak titik A ke garis cermin <b>sama dengan</b> jarak A′ ke garis cermin, dan keduanya berada di sisi yang berlawanan.</li></ul></div>
+<div class="card"><h3>2. Sifat-Sifat Refleksi</h3><div class="grid" id="sifat"></div></div>
+<h3>3. Jenis-Jenis Refleksi</h3><div id="jenis"></div></section>
+
+<section class="sec" id="rumus"><h2>🧮 Rumus dan Matriks Refleksi</h2><div class="grid" id="rgrid"></div>
+<div class="card"><h3>Hubungan Matriks dan Koordinat</h3><p>Titik (x, y) ditulis sebagai matriks kolom. Bayangannya diperoleh dengan mengalikan <b>matriks refleksi</b> (2×2) dengan matriks kolom tersebut:</p><p class="rule">(x′, y′)ᵀ = M · (x, y)ᵀ</p><p>Refleksi terhadap x = h dan y = k tidak punya matriks 2×2 tunggal, karena garisnya tidak melalui O. Gunakan rumus 2h − x atau 2k − y (diturunkan dari titik tengah: (x + x′)/2 = h).</p></div>
+<div class="card"><h3>Kalkulator Matriks (langkah demi langkah)</h3><div class="row"><label>Refleksi<select id="mt"></select></label><label>x<input type="number" id="mx" value="3"></label><label>y<input type="number" id="my" value="4"></label></div><div id="mout" style="overflow-x:auto"></div></div></section>
+
+<section class="sec" id="soal"><h2>✏️ Contoh Soal dan Pembahasan</h2><p>10 soal: 3 mudah, 4 sedang, 3 sulit. Coba kerjakan dulu, lalu buka pembahasannya.</p><div id="plist"></div></section>
+
+<section class="sec" id="lab"><h2>🧪 Laboratorium Refleksi</h2><div class="lab"><div class="card"><svg id="lsv" class="pl" viewBox="0 0 600 600"></svg><p class="small">Seret titik dengan mouse atau jari. Titik merah muda = titik aktif. Garis oranye = cermin.</p></div>
+<div><div class="card"><div class="row"><label>Bangun<select id="shape"><option value="dot">Titik A</option><option value="tri" selected>Segitiga ABC</option><option value="sq">Persegi ABCD</option></select></label><label>Refleksi terhadap<select id="type"></select></label></div>
+<div class="row"><label>h (x = h)<input type="number" id="hh" value="2" step="0.5" min="-10" max="10"></label><label>k (y = k)<input type="number" id="kk" value="1" step="0.5" min="-10" max="10"></label><label style="flex-direction:row;align-items:center"><input type="checkbox" id="snap" checked>&nbsp;Tempel ke grid</label></div>
+<div class="row"><label>Titik aktif<select id="act"></select></label><label>x<input type="number" id="px" step="0.1"></label><label>y<input type="number" id="py" step="0.1"></label></div>
+<div class="row"><label style="flex:1">Slider x<input type="range" id="sx" min="-10" max="10" step="0.1"></label><label style="flex:1">Slider y<input type="range" id="sy" min="-10" max="10" step="0.1"></label></div>
+<div class="row"><button class="btn" id="bR">RESET</button><button class="btn alt" id="bA">ACAK TITIK</button><button class="btn ghost" id="bS">TAMPILKAN BAYANGAN</button><button class="btn ghost" id="bH">SEMBUNYIKAN BAYANGAN</button><button class="btn ghost" id="bM">TAMPILKAN GARIS CERMIN</button></div></div>
+<div class="card" id="info"></div></div></div>
+<div class="card"><h3>🔬 Mode Eksperimen</h3><p>Hasil titik aktif untuk <b>semua</b> jenis refleksi (h dan k dari laboratorium):</p><div style="overflow-x:auto"><table class="t" id="etab"></table></div><h4>Pertanyaan Eksplorasi (klik untuk mencoba)</h4><button class="btn ghost" onclick="ex(1)">Apa yang terjadi jika titik dipindahkan?</button><button class="btn ghost" onclick="ex(2)">Apa yang terjadi jika garis cermin berubah?</button><button class="btn ghost" onclick="ex(3)">Mengapa jarak titik ke cermin tetap sama?</button><button class="btn ghost" onclick="ex(4)">Bagaimana jika titik tepat pada garis cermin?</button><div class="hid show" id="qa">Pilih salah satu pertanyaan di atas.</div></div></section>
+
+<section class="sec" id="kuis"><h2>📝 Kuis Interaktif</h2><div class="card" id="qbox" style="position:relative"></div></section>
+
+<section class="sec" id="game"><h2>🚀 MISSION: REFLECTION</h2>
+<div class="card" id="gstart"><p>Tentukan posisi bayangan dengan <b>mengetuk/klik bidang koordinat</b> sebelum waktu habis! 5 level, 3 soal per level. Level makin sulit: jenis cermin bertambah, lalu bangun segitiga, dan waktu makin singkat. Skor = 10 × level + sisa waktu.</p><button class="btn" onclick="gBegin()">MULAI MISI</button></div>
+<div id="gplay" style="display:none"><div class="card"><div class="row" style="justify-content:space-between"><b id="gl"></b><b id="gsc"></b><b id="gtm"></b></div><div class="bar"><i id="gbar" style="width:100%"></i></div><p id="gq" style="font-weight:700;font-size:1.1em"></p><svg id="gsv" class="pl" viewBox="0 0 480 480" style="max-width:480px"></svg><p id="gfb" style="font-weight:700;min-height:1.6em"></p></div></div>
+<div class="card" id="gend" style="display:none;text-align:center"></div></section>
+
+<section class="sec" id="ringkas"><h2>📋 Rangkuman</h2><div class="grid"><div class="card"><h3>Pengertian</h3><p>Refleksi memindahkan titik ke seberang garis cermin dengan jarak sama.</p></div><div class="card"><h3>Sifat</h3><ul><li>Bentuk, ukuran, panjang sisi, besar sudut tetap</li><li>Orientasi berubah</li><li>Titik–bayangan ⟂ cermin dan dibagi dua sama panjang</li></ul></div></div>
+<div class="card"><h3>Semua Rumus &amp; Matriks</h3><div style="overflow-x:auto"><table class="t" id="rtab"></table></div></div>
+<div class="grid"><div class="card"><h3>💡 Tips Mengingat</h3><ul><li>Sumbu X: <b>y</b> berubah tanda; sumbu Y: <b>x</b> berubah tanda.</li><li>y = x: tukar x dan y. y = −x: tukar lalu ubah kedua tanda.</li><li>Garis x = h / y = k: bayangan = 2 × garis − koordinat.</li><li>Titik di cermin: bayangan = titik itu sendiri.</li></ul></div><div class="card"><h3>⚠️ Kesalahan Umum</h3><ul><li>Tertukar rumus y = x dengan y = −x.</li><li>Lupa mengubah tanda pada refleksi titik O.</li><li>Menulis 2h − x sebagai x − 2h.</li><li>Salah mengalikan matriks (baris × kolom).</li><li>Tertukar urutan pada refleksi berurutan.</li></ul></div></div>
+<button class="btn" onclick="go('rumus')">LIHAT SEMUA RUMUS</button><button class="btn alt" onclick="go('kuis')">COBA KUIS</button></section>
+
+<section class="sec" id="profil"><h2>👥 DIBUAT DENGAN KELOMPOK 4 XI.2</h2><p><i>“Belajar Matematika Lebih Mudah Melalui Eksplorasi dan Interaksi.”</i></p><div class="grid" id="pgrid"></div></section>
+<footer>© Kelompok 4 XI.2 • Matematika Tingkat Lanjut Kelas XI SMA</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const f1=v=>String(Math.round(v*10)/10||0).replace('-','−'),f2=v=>String(Math.round(v*100)/100||0);
+const P=(x,y)=>`(${f1(x)}, ${f1(y)})`,LB='ABCD',ri=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,cl=v=>Math.max(-10,Math.min(10,v));
+const T=[
+{id:'x',n:'sumbu X',r:'(x, y) → (x, −y)',f:(x,y)=>[x,-y],m:[[1,0],[0,-1]],L:(h,k,R)=>[-R,0,R,0],dist:(x,y)=>Math.abs(y),on:(x,y)=>[x,0],d:'Pencerminan terhadap sumbu X (garis y = 0). Absis (x) tetap, ordinat (y) berubah tanda.'},
+{id:'y',n:'sumbu Y',r:'(x, y) → (−x, y)',f:(x,y)=>[-x,y],m:[[-1,0],[0,1]],L:(h,k,R)=>[0,-R,0,R],dist:(x,y)=>Math.abs(x),on:(x,y)=>[0,y],d:'Pencerminan terhadap sumbu Y (garis x = 0). Ordinat (y) tetap, absis (x) berubah tanda.'},
+{id:'o',n:'titik pusat O(0,0)',r:'(x, y) → (−x, −y)',f:(x,y)=>[-x,-y],m:[[-1,0],[0,-1]],L:()=>null,dist:(x,y)=>Math.hypot(x,y),on:()=>[0,0],d:'Pencerminan terhadap titik asal O. Titik O menjadi titik tengah ruas A–A′, sehingga kedua koordinat berubah tanda.'},
+{id:'yx',n:'garis y = x',r:'(x, y) → (y, x)',f:(x,y)=>[y,x],m:[[0,1],[1,0]],L:(h,k,R)=>[-R,-R,R,R],dist:(x,y)=>Math.abs(x-y)/Math.SQRT2,on:(x,y)=>[x,x],d:'Pencerminan terhadap garis diagonal y = x. Absis dan ordinat saling bertukar.'},
+{id:'ynx',n:'garis y = −x',r:'(x, y) → (−y, −x)',f:(x,y)=>[-y,-x],m:[[0,-1],[-1,0]],L:(h,k,R)=>[-R,R,R,-R],dist:(x,y)=>Math.abs(x+y)/Math.SQRT2,on:(x,y)=>[x,-x],d:'Pencerminan terhadap garis y = −x. Absis dan ordinat bertukar tempat dan keduanya berubah tanda.'},
+{id:'h',n:'garis x = h',r:'(x, y) → (2h − x, y)',f:(x,y,h)=>[2*h-x,y],L:(h,k,R)=>[h,-R,h,R],dist:(x,y,h)=>Math.abs(x-h),on:(x,y,h)=>[h,y],d:'Pencerminan terhadap garis tegak x = h. Ordinat tetap. Titik tengah A–A′ ada di x = h sehingga (x + x′)/2 = h, jadi x′ = 2h − x.'},
+{id:'k',n:'garis y = k',r:'(x, y) → (x, 2k − y)',f:(x,y,h,k)=>[x,2*k-y],L:(h,k,R)=>[-R,k,R,k],dist:(x,y,h,k)=>Math.abs(y-k),on:(x,y,h,k)=>[x,k],d:'Pencerminan terhadap garis mendatar y = k. Absis tetap. (y + y′)/2 = k, jadi y′ = 2k − y.'}];
+function mk(R,u,st){const W=2*R*u,X=x=>W/2+x*u,Y=y=>W/2-y*u,fs=Math.max(9,u*.4);let g='';
+for(let i=-R;i<=R;i++){const a=i==0,c=a?'#14214d':'#dfe6ff',w=a?2:1;g+=`<line x1="${X(i)}" y1="0" x2="${X(i)}" y2="${W}" stroke="${c}" stroke-width="${w}"/><line x1="0" y1="${Y(i)}" x2="${W}" y2="${Y(i)}" stroke="${c}" stroke-width="${w}"/>`;
+if(i&&i%st==0)g+=`<text x="${X(i)}" y="${Y(0)+fs+2}" font-size="${fs}" text-anchor="middle" fill="#6b78a8">${f1(i)}</text><text x="${X(0)-4}" y="${Y(i)+4}" font-size="${fs}" text-anchor="end" fill="#6b78a8">${f1(i)}</text>`}
+g+=`<text x="${W-14}" y="${Y(0)-6}" font-weight="700" fill="#14214d">x</text><text x="${X(0)+6}" y="13" font-weight="700" fill="#14214d">y</text>`;return{W,X,Y,g,R,u}}
+const dot=(p,x,y,c,l,r=6)=>`<circle cx="${p.X(x)}" cy="${p.Y(y)}" r="${r}" fill="${c}" stroke="#fff" stroke-width="2"/><text x="${p.X(x)+9}" y="${p.Y(y)-9}" font-weight="700" font-size="${Math.max(11,p.u*.5)}" fill="${c}">${l}</text>`;
+const seg=(p,a,b,c,d)=>`<line x1="${p.X(a[0])}" y1="${p.Y(a[1])}" x2="${p.X(b[0])}" y2="${p.Y(b[1])}" stroke="${c}" stroke-width="1.5" stroke-dasharray="${d||'3 4'}"/>`;
+const poly=(p,a,c,d)=>a.length>2?`<polygon points="${a.map(q=>p.X(q[0])+','+p.Y(q[1])).join(' ')}" fill="${c}22" stroke="${c}" stroke-width="2.5" ${d?'stroke-dasharray="6 4"':''}/>`:'';
+function mirror(p,t,h,k){const l=t.L(h,k,p.R);return l?`<line x1="${p.X(l[0])}" y1="${p.Y(l[1])}" x2="${p.X(l[2])}" y2="${p.Y(l[3])}" stroke="#ff8a1f" stroke-width="3" stroke-dasharray="9 5"/>`:`<circle cx="${p.X(0)}" cy="${p.Y(0)}" r="9" fill="#ff8a1f55" stroke="#ff8a1f" stroke-width="3"/>`}
+const mat=r=>`<span class="mat"><table>${r.map(a=>`<tr>${a.map(v=>`<td>${typeof v=='number'?f1(v):v}</td>`).join('')}</tr>`).join('')}</table></span>`;
+const mm=(m,x,y)=>{const[a,b]=m[0],[c,d]=m[1],s=f1;return `${mat(m)}${mat([[x],[y]])} = ${mat([[`(${s(a)})(${s(x)}) + (${s(b)})(${s(y)})`],[`(${s(c)})(${s(x)}) + (${s(d)})(${s(y)})`]])} = ${mat([[a*x+b*y],[c*x+d*y]])}`};
+function st(t,x,y,h,k){const s=f1;switch(t.id){
+case'x':return[`x′ = x = ${s(x)}`,`y′ = −y = −(${s(y)}) = ${s(-y)}`];
+case'y':return[`x′ = −x = −(${s(x)}) = ${s(-x)}`,`y′ = y = ${s(y)}`];
+case'o':return[`x′ = −x = −(${s(x)}) = ${s(-x)}`,`y′ = −y = −(${s(y)}) = ${s(-y)}`];
+case'yx':return[`x′ = y = ${s(y)}`,`y′ = x = ${s(x)}`];
+case'ynx':return[`x′ = −y = −(${s(y)}) = ${s(-y)}`,`y′ = −x = −(${s(x)}) = ${s(-x)}`];
+case'h':return[`x′ = 2h − x = 2(${s(h)}) − (${s(x)}) = ${s(2*h-x)}`,`y′ = y = ${s(y)}`];
+default:return[`x′ = x = ${s(x)}`,`y′ = 2k − y = 2(${s(k)}) − (${s(y)}) = ${s(2*k-y)}`]}}
+function mini(t,x,y,h,k){const p=mk(6,22,2),[a,b]=t.f(x,y,h,k);return `<svg class="pl" viewBox="0 0 ${p.W} ${p.W}" style="max-width:290px">${p.g}${mirror(p,t,h,k)}${seg(p,[x,y],[a,b],'#9aa6d6')}${dot(p,x,y,'#2f6bff','A',5)}${dot(p,a,b,'#7c4dff','A′',5)}</svg>`}
+
+/* ===== Navigasi ===== */
+const tabs=[['home','Beranda'],['tujuan','Tujuan'],['kenal','Pengenalan'],['materi','Materi'],['rumus','Rumus'],['soal','Contoh Soal'],['lab','Laboratorium'],['kuis','Kuis'],['game','Tantangan'],['ringkas','Rangkuman'],['profil','Profil']];
+$('#nav').innerHTML=tabs.map(t=>`<button data-i="${t[0]}" onclick="go('${t[0]}')" class="${t[0]=='home'?'on':''}">${t[1]}</button>`).join('');
+function go(id){gStop();$$('.sec').forEach(s=>s.classList.toggle('on',s.id==id));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.i==id));window.scrollTo(0,0);if(id=='lab')lr()}
+const tg=id=>$('#'+id).classList.toggle('show');
+
+/* ===== Beranda: animasi ===== */
+for(let i=0;i<14;i++){const d=document.createElement('span');d.className='dot';const s=ri(6,18);d.style.cssText=`width:${s}px;height:${s}px;left:${ri(0,98)}%;top:${ri(0,95)}%;animation-delay:${i*.4}s`;$('#hero').prepend(d)}
+const hp=mk(6,24,2),tri=[[1,1],[5,1],[2,4]];let ht=0;
+setInterval(()=>{ht+=.05;const c=Math.cos(ht),mv=tri.map(q=>[q[0],q[1]*c]),im=tri.map(q=>[q[0],-q[1]]);
+$('#hsv').innerHTML=hp.g+`<line x1="0" y1="${hp.Y(0)}" x2="${hp.W}" y2="${hp.Y(0)}" stroke="#ff8a1f" stroke-width="3" stroke-dasharray="8 5"/>`+poly(hp,tri,'#2f6bff')+poly(hp,im,'#7c4dff',1)+poly(hp,mv,'#ff8a1f')+mv.map((q,i)=>dot(hp,q[0],q[1],'#ff8a1f','',4)).join('')+dot(hp,tri[0][0],tri[0][1],'#2f6bff','A',4)+dot(hp,im[0][0],im[0][1],'#7c4dff','A′',4)},50);
+
+/* ===== Tujuan ===== */
+const TJ=['Memahami pengertian dan konsep refleksi.','Mengidentifikasi berbagai jenis refleksi.','Menentukan koordinat bayangan suatu titik.','Menggunakan rumus refleksi dengan benar.','Memahami matriks transformasi refleksi.','Menyelesaikan masalah matematika yang berkaitan dengan refleksi.','Mengeksplorasi perubahan koordinat melalui laboratorium interaktif.'];
+$('#tlist').innerHTML=TJ.map((t,i)=>`<label class="card" style="flex-direction:row;align-items:center;gap:12px;cursor:pointer;font-size:1.05em"><input type="checkbox" class="tc" style="width:22px;height:22px"><span class="big" style="font-size:1.6em">${i+1}</span><span>${t}</span></label>`).join('');
+const tUp=()=>{const n=$$('.tc:checked').length;$('#tbar').style.width=n/7*100+'%';$('#ttxt').textContent=`${n} dari 7 tujuan tercapai`+(n==7?' 🎉 Hebat!':'')};$$('.tc').forEach(c=>c.onchange=tUp);tUp();
+
+/* ===== Pengenalan demo ===== */
+const dp=mk(6,22,2);
+function dm(){const x=parseFloat($('#dm').value),A=[x,2],B=[-x,2];$('#dsv').innerHTML=dp.g+`<line x1="${dp.X(0)}" y1="0" x2="${dp.X(0)}" y2="${dp.W}" stroke="#ff8a1f" stroke-width="3" stroke-dasharray="8 5"/>`+seg(dp,A,B,'#9aa6d6')+dot(dp,x,2,'#2f6bff','A',5)+dot(dp,-x,2,'#7c4dff','A′',5);
+$('#dmt').innerHTML=`A${P(x,2)} → A′${P(-x,2)}<br>Jarak A ke cermin = ${f1(Math.abs(x))}; jarak A′ ke cermin = ${f1(Math.abs(x))}. <b>Sama!</b>`}
+$('#dm').oninput=dm;dm();
+
+/* ===== Materi ===== */
+$('#sifat').innerHTML=['Bentuk dan ukuran bangun tetap (kongruen).','Panjang sisi tetap.','Besar sudut tetap.','Jarak antara titik-titik tetap (isometri).','Orientasi bangun berubah (searah jarum jam menjadi berlawanan).','Garis penghubung titik dan bayangannya tegak lurus terhadap garis cermin.','Garis cermin membagi dua sama panjang ruas yang menghubungkan titik dan bayangannya.'].map((s,i)=>`<div class="card" style="background:#f3f6ff"><b>${i+1}.</b> ${s}</div>`).join('');
+$('#jenis').innerHTML=T.map((t,i)=>{const h=2,k=1,[a,b]=t.f(3,4,h,k);return `<div class="card"><h3>${LB[i]||'EFG'[i-4]}. Refleksi terhadap ${t.n}${t.id=='h'?' (h = 2)':t.id=='k'?' (k = 1)':''}</h3><div class="two">${mini(t,3,4,h,k)}<div><p>${t.d}</p><p class="rule">${t.r}</p><p><b>Contoh:</b> A(3, 4) → A′${P(a,b)}</p><b>Proses:</b><ol>${st(t,3,4,h,k).map(s=>'<li>'+s+'</li>').join('')}</ol></div></div></div>`}).join('');
+/* label huruf A-G */
+$$('#jenis h3').forEach((e,i)=>e.innerHTML=e.innerHTML.replace(/^[^.]+\./,'ABCDEFG'[i]+'.'));
+
+/* ===== Rumus ===== */
+$('#rgrid').innerHTML=T.map((t,i)=>`<div class="card" style="border-top:5px solid ${i%2?'var(--p)':'var(--b)'}"><b>Terhadap ${t.n}</b><p class="rule">${t.r}</p>${t.m?mat(t.m):'<span class="small">Tanpa matriks 2×2 tunggal (garis tidak melalui O)</span>'}</div>`).join('');
+const MT=T.filter(t=>t.m);$('#mt').innerHTML=MT.map((t,i)=>`<option value="${i}">${t.n}</option>`).join('');
+function mc(){const x=parseFloat($('#mx').value)||0,y=parseFloat($('#my').value)||0,t=MT[$('#mt').value];$('#mout').innerHTML=`<p>Titik (${f1(x)}, ${f1(y)}) dicerminkan terhadap ${t.n}:</p><p>${mm(t.m,x,y)}</p><p><b>Jadi bayangannya ${P(...t.f(x,y))}</b></p>`}
+['#mt','#mx','#my'].forEach(s=>$(s).oninput=mc);mc();
+$('#rtab').innerHTML='<tr><th>Refleksi</th><th>Rumus</th><th>Matriks</th></tr>'+T.map(t=>`<tr><td>${t.n}</td><td>${t.r}</td><td>${t.m?mat(t.m):'—'}</td></tr>`).join('');
+
+/* ===== Soal latihan ===== */
+const PR=[
+['Mudah','Tentukan bayangan titik A(5, 2) jika direfleksikan terhadap sumbu X.','Pada sumbu X, hanya ordinat yang berubah tanda.',['Rumus: (x, y) → (x, −y)','A(5, 2) → (5, −2)'],'A′(5, −2)'],
+['Mudah','Tentukan bayangan titik B(−3, 6) oleh refleksi terhadap sumbu Y.','Pada sumbu Y, absis berubah tanda.',['Rumus: (x, y) → (−x, y)','B(−3, 6) → (−(−3), 6) = (3, 6)'],'B′(3, 6)'],
+['Mudah','Tentukan bayangan titik C(4, −7) oleh refleksi terhadap titik pusat O(0, 0).','Kedua koordinat berubah tanda.',['Rumus: (x, y) → (−x, −y)','C(4, −7) → (−4, 7)'],'C′(−4, 7)'],
+['Sedang','Titik P(−2, 5) direfleksikan terhadap garis y = −x. Tentukan bayangannya.','Rumus: (x, y) → (−y, −x).',['x′ = −y = −5','y′ = −x = −(−2) = 2'],'P′(−5, 2)'],
+['Sedang','Tentukan bayangan titik Q(6, −1) oleh refleksi terhadap garis x = 2.','Gunakan x′ = 2h − x dengan h = 2.',['x′ = 2(2) − 6 = −2','y′ = y = −1'],'Q′(−2, −1)'],
+['Sedang','Segitiga ABC dengan A(1, 1), B(4, 1), C(1, 3) direfleksikan terhadap sumbu X. Tentukan koordinat bayangannya.','Cerminkan tiap titik sudut: (x, y) → (x, −y).',['A(1, 1) → A′(1, −1)','B(4, 1) → B′(4, −1)','C(1, 3) → C′(1, −3)','Bentuk dan ukuran segitiga tetap, hanya orientasinya berubah.'],'A′(1, −1), B′(4, −1), C′(1, −3)'],
+['Sedang','Titik R(2, −3) dicerminkan dengan matriks (0 1 ; 1 0) (baris dipisah titik koma). Tentukan bayangannya dan jenis refleksinya.','Kalikan matriks dengan kolom (2, −3).',['x′ = 0·2 + 1·(−3) = −3','y′ = 1·2 + 0·(−3) = 2','Matriks (0 1 ; 1 0) adalah refleksi terhadap garis y = x.'],'R′(−3, 2), refleksi terhadap y = x'],
+['Sulit','Titik S(3, −2) direfleksikan terhadap garis y = 4, kemudian hasilnya direfleksikan terhadap sumbu Y. Tentukan bayangan akhirnya.','Lakukan satu per satu: 2k − y, lalu −x.',['Terhadap y = 4: (3, 2(4) − (−2)) = (3, 10)','Terhadap sumbu Y: (−3, 10)'],'S″(−3, 10)'],
+['Sulit','Bayangan titik A oleh refleksi terhadap garis x = 3 adalah A′(−2, 5). Tentukan koordinat A.','Refleksi bersifat simetris: cerminkan A′ kembali terhadap garis yang sama.',['x′ = 2h − x → −2 = 6 − x → x = 8','y = y′ = 5'],'A(8, 5)'],
+['Sulit','Titik P(a, b) direfleksikan terhadap sumbu X, kemudian terhadap garis y = x, menghasilkan (4, −7). Tentukan P.','Kerjakan dari titik P dengan dua langkah, lalu samakan hasilnya.',['Sumbu X: (a, b) → (a, −b)','Garis y = x: (a, −b) → (−b, a)','Samakan: (−b, a) = (4, −7) → b = −4, a = −7','Cek: (−7, −4) → (−7, 4) → (4, −7) ✓'],'P(−7, −4)']];
+$('#plist').innerHTML=PR.map((p,i)=>`<div class="card"><span class="tag ${{Mudah:'g',Sedang:'y',Sulit:'r'}[p[0]]}">${p[0]}</span> <b>Soal ${i+1}</b><p>${p[1]}</p><button class="btn ghost" onclick="tg('h${i}')">💡 Petunjuk</button><button class="btn" onclick="tg('s${i}')">Tampilkan Pembahasan</button><div id="h${i}" class="hid">${p[2]}</div><div id="s${i}" class="hid"><b>Langkah penyelesaian:</b><ol>${p[3].map(s=>`<li>${s}</li>`).join('')}</ol><b>Jawaban akhir: ${p[4]}</b></div></div>`).join('');
+
+/* ===== Laboratorium ===== */
+const lp=mk(10,30,1),SH={dot:[[3,4]],tri:[[3,4],[6,1],[1,1]],sq:[[2,2],[5,2],[5,5],[2,5]]},L={shape:'tri',type:0,h:2,k:1,pts:[],sel:0,img:true,mir:true,drag:-1};
+$('#type').innerHTML=T.map((t,i)=>`<option value="${i}">${t.n.replace(/^(\w)/,c=>c.toUpperCase())}</option>`).join('');
+function fillAct(){$('#act').innerHTML=L.pts.map((q,i)=>`<option value="${i}">${LB[i]}</option>`).join('');$('#act').value=L.sel}
+function sync(){const q=L.pts[L.sel];$('#px').value=f2(q.x);$('#py').value=f2(q.y);$('#sx').value=q.x;$('#sy').value=q.y;$('#act').value=L.sel;$('#bM').textContent=L.mir?'SEMBUNYIKAN GARIS CERMIN':'TAMPILKAN GARIS CERMIN'}
+function lr(skip){const t=T[L.type],{X,Y}=lp,im=L.pts.map(q=>t.f(q.x,q.y,L.h,L.k)),pa=L.pts.map(q=>[q.x,q.y]);let s=lp.g;
+if(L.mir)s+=mirror(lp,t,L.h,L.k);s+=poly(lp,pa,'#2f6bff');
+if(L.img){s+=poly(lp,im,'#7c4dff',1);pa.forEach((q,i)=>s+=seg(lp,q,im[i],'#9aa6d6'));im.forEach((q,i)=>s+=dot(lp,q[0],q[1],'#7c4dff',LB[i]+'′'))}
+L.pts.forEach((q,i)=>s+=dot(lp,q.x,q.y,i==L.sel?'#ff3d71':'#2f6bff',LB[i],i==L.sel?9:7));
+$('#lsv').innerHTML=s;const q=L.pts[L.sel],[a,b]=im[L.sel];
+$('#info').innerHTML=`<h3>Hasil Perhitungan</h3><p><b>Rumus:</b> <span class="rule">${t.r}</span>${t.id=='h'?` dengan h = ${f1(L.h)}`:t.id=='k'?` dengan k = ${f1(L.k)}`:''}</p>
+<table class="t"><tr><th>Awal</th><th>Bayangan</th></tr>${L.pts.map((p,i)=>`<tr><td>${LB[i]}${P(p.x,p.y)}</td><td>${L.img?LB[i]+'′'+P(...im[i]):'(disembunyikan)'}</td></tr>`).join('')}</table>
+<p><b>Proses titik ${LB[L.sel]}${P(q.x,q.y)}:</b></p><ol>${st(t,q.x,q.y,L.h,L.k).map(s=>`<li>${s}</li>`).join('')}</ol>${t.m?`<p><b>Dengan matriks:</b></p><div style="overflow-x:auto">${mm(t.m,q.x,q.y)}</div>`:''}<p><b>Koordinat bayangan: ${LB[L.sel]}′${P(a,b)}</b></p>`;
+$('#etab').innerHTML=`<tr><th>Refleksi</th><th>Rumus</th><th>${LB[L.sel]}${P(q.x,q.y)} →</th></tr>`+T.map(z=>`<tr><td>${z.n}</td><td>${z.r}</td><td><b>${P(...z.f(q.x,q.y,L.h,L.k))}</b></td></tr>`).join('');
+if(!skip)sync()}
+function lSet(shape){L.shape=shape;L.pts=SH[shape].map(([x,y])=>({x,y}));L.sel=0;fillAct()}
+function toXY(e){const r=$('#lsv').getBoundingClientRect(),x=(e.clientX-r.left)/r.width*600,y=(e.clientY-r.top)/r.height*600;return[(x-300)/30,(300-y)/30]}
+const sv=v=>$('#snap').checked?Math.round(v):Math.round(v*10)/10;
+const lsv=$('#lsv');
+lsv.addEventListener('pointerdown',e=>{const[x,y]=toXY(e);let b=-1,bd=1.1;L.pts.forEach((q,i)=>{const d=Math.hypot(q.x-x,q.y-y);if(d<bd){bd=d;b=i}});if(b>=0){L.drag=b;L.sel=b;lsv.setPointerCapture(e.pointerId);e.preventDefault();lr()}});
+lsv.addEventListener('pointermove',e=>{if(L.drag<0)return;const[x,y]=toXY(e),q=L.pts[L.drag];q.x=cl(sv(x));q.y=cl(sv(y));lr()});
+['pointerup','pointercancel'].forEach(n=>lsv.addEventListener(n,()=>L.drag=-1));
+$('#shape').onchange=e=>{lSet(e.target.value);lr()};
+$('#type').onchange=e=>{L.type=+e.target.value;lr()};
+$('#act').onchange=e=>{L.sel=+e.target.value;lr()};
+$('#hh').oninput=e=>{const v=parseFloat(e.target.value);if(!isNaN(v)){L.h=cl(v);lr(1)}};
+$('#kk').oninput=e=>{const v=parseFloat(e.target.value);if(!isNaN(v)){L.k=cl(v);lr(1)}};
+$('#px').oninput=e=>{const v=parseFloat(e.target.value);if(!isNaN(v)){L.pts[L.sel].x=cl(v);lr(1);$('#sx').value=L.pts[L.sel].x}};
+$('#py').oninput=e=>{const v=parseFloat(e.target.value);if(!isNaN(v)){L.pts[L.sel].y=cl(v);lr(1);$('#sy').value=L.pts[L.sel].y}};
+$('#sx').oninput=e=>{L.pts[L.sel].x=cl(sv(+e.target.value));lr()};
+$('#sy').oninput=e=>{L.pts[L.sel].y=cl(sv(+e.target.value));lr()};
+$('#bR').onclick=()=>{L.type=0;L.h=2;L.k=1;L.img=L.mir=true;$('#type').value=0;$('#hh').value=2;$('#kk').value=1;lSet($('#shape').value);lr()};
+$('#bA').onclick=()=>{const r=()=>ri(-8,8);if(L.shape=='dot')L.pts=[{x:r(),y:r()}];else if(L.shape=='tri')L.pts=[0,1,2].map(()=>({x:r(),y:r()}));else{const s=ri(2,5),a=ri(-8,8-s),b=ri(-8,8-s);L.pts=[[a,b],[a+s,b],[a+s,b+s],[a,b+s]].map(([x,y])=>({x,y}))}L.sel=0;lr()};
+$('#bS').onclick=()=>{L.img=true;lr()};$('#bH').onclick=()=>{L.img=false;lr()};$('#bM').onclick=()=>{L.mir=!L.mir;lr()};
+function ex(n){const q=L.pts[L.sel],t=T[L.type],nm=LB[L.sel],im=t.f(q.x,q.y,L.h,L.k);let s;
+if(n==1){const ox=q.x,oy=q.y;q.x=cl(q.x+2);q.y=cl(q.y-1);const n2=t.f(q.x,q.y,L.h,L.k);s=`Titik ${nm} dipindah dari ${P(ox,oy)} ke ${P(q.x,q.y)}. Bayangannya ikut berpindah dari ${P(...im)} ke ${P(...n2)}. Bayangan selalu dihitung ulang dari posisi terbaru titik asal.`}
+else if(n==2){L.type=(L.type+1)%7;$('#type').value=L.type;const t2=T[L.type],n2=t2.f(q.x,q.y,L.h,L.k);s=`Cermin diganti menjadi ${t2.n}. Titik ${nm}${P(q.x,q.y)} tidak bergerak, tetapi bayangannya pindah dari ${P(...im)} ke ${P(...n2)}. Letak bayangan bergantung pada garis cermin.`}
+else if(n==3){const d1=t.dist(q.x,q.y,L.h,L.k),d2=t.dist(im[0],im[1],L.h,L.k);s=`Untuk cermin ${t.n}: jarak ${nm} ke cermin = ${f2(d1)} satuan, jarak ${nm}′ ke cermin = ${f2(d2)} satuan. Sama, karena ${nm}′ dibentuk dengan menempuh jarak yang sama ke seberang cermin; cermin adalah sumbu (pembagi dua tegak lurus) ruas ${nm}${nm}′.`}
+else{const[a,b]=t.on(q.x,q.y,L.h,L.k);q.x=cl(a);q.y=cl(b);const i2=t.f(q.x,q.y,L.h,L.k);s=`${nm} dipindah ke ${P(q.x,q.y)} tepat pada cermin (${t.n}). Bayangannya ${nm}′${P(...i2)} berimpit dengan ${nm}: jaraknya 0, sehingga titik itu tidak berpindah (titik tetap/invarian).`}
+lr();$('#qa').innerHTML='💬 '+s}
+lSet('tri');lr();
+
+/* ===== Kuis ===== */
+const Q=[
+['Refleksi (pencerminan) adalah transformasi yang …',['menggeser setiap titik sejauh jarak tertentu','memutar titik terhadap suatu pusat','memindahkan titik ke seberang garis cermin dengan jarak yang sama','memperbesar bangun terhadap titik pusat'],2,'Refleksi memindahkan titik ke sisi seberang cermin dengan jarak sama dari cermin.'],
+['Pernyataan yang SALAH tentang sifat refleksi adalah …',['ukuran bangun berubah','besar sudut tetap','panjang sisi tetap','orientasi bangun berubah'],0,'Refleksi adalah isometri: ukuran, panjang sisi, dan sudut tetap. Yang berubah hanya orientasi.'],
+['Bayangan titik A(3, −5) oleh refleksi terhadap sumbu X adalah …',['(3, 5)','(3, 5)','(−3, 5)','(−3, −5)'].map((v,i)=>i==0?'(3, −5)':v),1,'Sumbu X: (x, y) → (x, −y) sehingga (3, −5) → (3, 5).'],
+['Bayangan titik B(−4, 7) oleh refleksi terhadap sumbu Y adalah …',['(−4, −7)','(4, −7)','(7, −4)','(4, 7)'],3,'Sumbu Y: (x, y) → (−x, y) sehingga (−4, 7) → (4, 7).'],
+['Bayangan titik C(6, −2) oleh refleksi terhadap titik pusat O adalah …',['(−6, 2)','(6, 2)','(−6, −2)','(−2, 6)'],0,'Titik O: (x, y) → (−x, −y) sehingga (6, −2) → (−6, 2).'],
+['Bayangan titik D(2, 8) oleh refleksi terhadap garis y = x adalah …',['(2, −8)','(−2, −8)','(8, 2)','(−8, 2)'],2,'Garis y = x: (x, y) → (y, x) sehingga (2, 8) → (8, 2).'],
+['Bayangan titik E(3, −6) oleh refleksi terhadap garis y = −x adalah …',['(−6, 3)','(6, −3)','(−3, 6)','(3, 6)'],1,'Garis y = −x: (x, y) → (−y, −x) sehingga (3, −6) → (6, −3).'],
+['Bayangan titik F(5, 3) oleh refleksi terhadap garis x = 2 adalah …',['(7, 3)','(−5, 3)','(1, 3)','(−1, 3)'],3,'x′ = 2h − x = 4 − 5 = −1, y tetap 3.'],
+['Bayangan titik G(−1, 4) oleh refleksi terhadap garis y = 3 adalah …',['(−1, 2)','(−1, −4)','(1, 2)','(−1, 10)'],0,'y′ = 2k − y = 6 − 4 = 2, x tetap −1.'],
+['Matriks refleksi terhadap sumbu X adalah … (baris dipisah titik koma)',['(−1 0 ; 0 1)','(0 1 ; 1 0)','(1 0 ; 0 −1)','(−1 0 ; 0 −1)'],2,'Sumbu X: (x, y) → (x, −y), sehingga matriksnya (1 0 ; 0 −1).'],
+['Matriks refleksi terhadap garis y = −x adalah …',['(0 1 ; 1 0)','(0 −1 ; −1 0)','(−1 0 ; 0 1)','(1 0 ; 0 −1)'],1,'Garis y = −x: (x, y) → (−y, −x), sehingga matriksnya (0 −1 ; −1 0).'],
+['Matriks (0 1 ; 1 0) dikalikan titik (2, 5) menghasilkan …',['(2, 5)','(−5, −2)','(−2, 5)','(5, 2)'],3,'x′ = 0·2 + 1·5 = 5 dan y′ = 1·2 + 0·5 = 2, jadi (5, 2).'],
+['Jika sebuah titik terletak tepat pada garis cermin, bayangannya …',['berimpit dengan titik itu sendiri','berada di titik O','berjarak dua kali dari cermin','berlawanan tanda'],0,'Jaraknya ke cermin 0, sehingga bayangan = titik itu sendiri.'],
+['Garis yang menghubungkan titik dan bayangannya terhadap garis cermin bersifat …',['sejajar','membentuk sudut 45°','tegak lurus dan dibagi dua sama panjang oleh cermin','berimpit'],2,'Cermin adalah sumbu ruas penghubung: tegak lurus dan melalui titik tengahnya.'],
+['(Penerapan) Titik (4, 1) dan bayangannya (−2, 1). Persamaan garis cerminnya adalah …',['sumbu Y (x = 0)','x = 1','x = 2','y = 1'],1,'Titik tengah x = (4 + (−2))/2 = 1 dan y sama, jadi cermin tegak x = 1.']];
+let qi=0,qs=0,qsel=-1,qdone=false;
+function qr(){const b=$('#qbox');
+if(qi>=Q.length){const sc=Math.round(qs*100/Q.length),ev=sc>=90?['Sangat Baik 🏆','Pemahamanmu sangat kuat. Coba Mission: Reflection!']:sc>=75?['Baik 👍','Tinggal sedikit lagi. Ulangi materi yang masih salah.']:sc>=60?['Cukup 🙂','Pelajari kembali rumus dan coba laboratorium.']:['Perlu Belajar Lagi 📚','Baca ulang Materi dan Rumus, lalu ulangi kuis.'];
+b.innerHTML=`<div style="text-align:center"><h3>Hasil Akhir</h3><div class="big">${sc}</div><p>Benar ${qs} dari ${Q.length} soal (${sc}%)</p><h3>${ev[0]}</h3><p>${ev[1]}</p><button class="btn" onclick="qi=0;qs=0;qr()">ULANGI KUIS</button></div>`;return}
+const q=Q[qi];qsel=-1;qdone=false;
+b.innerHTML=`<div class="row" style="justify-content:space-between"><b>Soal ${qi+1} dari ${Q.length}</b><span>Terjawab: ${qi} • Skor sementara: ${Math.round(qs*100/Q.length)}</span></div><div class="bar"><i style="width:${qi/Q.length*100}%"></i></div><p style="font-weight:700;font-size:1.1em">${q[0]}</p>${q[1].map((o,i)=>`<button class="opt" data-i="${i}"><b>${'ABCD'[i]}.</b> ${o}</button>`).join('')}<button class="btn" id="qj">JAWAB</button><div class="hid show" id="qf" style="display:none"></div>`;
+$$('.opt').forEach(o=>o.onclick=()=>{if(qdone)return;qsel=+o.dataset.i;$$('.opt').forEach(x=>x.classList.toggle('s',x==o))});
+$('#qj').onclick=()=>{const f=$('#qf');f.style.display='block';if(qdone){qi++;qr();return}
+if(qsel<0){f.textContent='Pilih salah satu jawaban dulu ya.';return}
+qdone=true;const ok=qsel==q[2];$$('.opt').forEach((o,i)=>{o.classList.remove('s');if(i==q[2])o.classList.add('c');else if(i==qsel)o.classList.add('w')});
+if(ok){qs++;b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),600);for(let i=0;i<8;i++){const s=document.createElement('span');s.className='fx';s.textContent=['⭐','✨','🎉'][i%3];s.style.cssText=`left:${10+i*11}%;top:60%;animation-delay:${i*.05}s`;b.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+f.innerHTML=(ok?'✅ <b>Benar!</b> ':'❌ <b>Belum tepat.</b> ')+q[3];$('#qj').textContent=qi==Q.length-1?'LIHAT HASIL':'SOAL BERIKUTNYA'}}
+qr();
+
+/* ===== Game ===== */
+const GT=[25,22,20,18,15],LVT=[['x','y'],['x','y','o','yx'],['x','y','o','yx','ynx'],T.map(t=>t.id),T.map(t=>t.id)],GP=mk(8,30,1),G={lv:1,rd:0,sc:0,t:0,run:false,cur:null,ans:null,ok:false,rev:false,tm:null};
+function gStop(){G.run=false;clearInterval(G.tm);if($('#gplay').style.display!='none'||$('#gend').style.display!='none'){$('#gplay').style.display='none';$('#gend').style.display='none';$('#gstart').style.display='block'}}
+function gBegin(){G.lv=1;G.rd=0;G.sc=0;G.run=true;$('#gstart').style.display='none';$('#gend').style.display='none';$('#gplay').style.display='block';clearInterval(G.tm);G.tm=setInterval(gTick,200);gNew()}
+function gNew(){const l=G.lv,ids=LVT[l-1],t=T.find(z=>z.id==ids[ri(0,ids.length-1)]),big=l>=4,h=big?ri(-4,4):0,k=big?ri(-4,4):0,m=l==1?4:l==2?5:6;let pts,idx,img,n=0;
+do{pts=big?[0,1,2].map(()=>[ri(-m,m),ri(-m,m)]):[[ri(-m,m),ri(-m,m)]];idx=ri(0,pts.length-1);img=pts.map(q=>t.f(q[0],q[1],h,k));n++}while(n<300&&(img.some(q=>Math.abs(q[0])>8||Math.abs(q[1])>8)||(img[idx][0]==pts[idx][0]&&img[idx][1]==pts[idx][1])));
+G.cur={t,h,k,pts,idx,img,nm:big?'ABC'[idx]:'P'};G.ans=null;G.rev=false;G.t=GT[l-1];G.max=G.t;$('#gfb').textContent='';
+$('#gq').innerHTML=`Cerminkan titik ${G.cur.nm}${P(...pts[idx])} terhadap ${t.n.replace('garis x = h','garis x = '+h).replace('garis y = k','garis y = '+k)}. Klik letak ${G.cur.nm}′ pada bidang.`;gDraw();gHud()}
+function gHud(){$('#gl').textContent=`Level ${G.lv} • Soal ${G.rd+1}/3`;$('#gsc').textContent='Skor: '+G.sc;$('#gtm').textContent='⏱ '+Math.max(0,Math.ceil(G.t))+' dtk';$('#gbar').style.width=Math.max(0,G.t/G.max*100)+'%'}
+function gDraw(){const c=G.cur,p=GP;let s=p.g+mirror(p,c.t,c.h,c.k)+poly(p,c.pts,'#2f6bff');c.pts.forEach((q,i)=>s+=dot(p,q[0],q[1],i==c.idx?'#ff3d71':'#2f6bff',c.pts.length>2?'ABC'[i]:'P',i==c.idx?8:5));
+if(G.ans&&G.ans!='t')s+=dot(p,G.ans[0],G.ans[1],G.ok?'#16a34a':'#e11d48','✕',7);
+if(G.rev)s+=dot(p,c.img[c.idx][0],c.img[c.idx][1],'#16a34a',c.nm+'′',9);$('#gsv').innerHTML=s}
+function gTick(){if(!G.run||G.ans)return;G.t-=.2;gHud();if(G.t<=0)gEnd('t')}
+function gEnd(a){if(G.ans)return;G.ans=a;const c=G.cur,r=c.img[c.idx];G.ok=a!='t'&&a[0]==r[0]&&a[1]==r[1];G.rev=true;
+if(G.ok){const pt=10*G.lv+Math.ceil(G.t);G.sc+=pt;$('#gfb').style.color='#16a34a';$('#gfb').textContent=`✅ Tepat! +${pt} poin`}else{$('#gfb').style.color='#e11d48';$('#gfb').textContent=(a=='t'?'⏰ Waktu habis! ':'❌ Belum tepat. ')+`Jawaban: ${c.nm}′${P(...r)}`}
+gDraw();gHud();setTimeout(()=>{if(!G.run)return;G.rd++;if(G.rd==3){G.lv++;G.rd=0}if(G.lv>5){G.run=false;clearInterval(G.tm);$('#gplay').style.display='none';$('#gend').style.display='block';$('#gend').innerHTML=`<h3>🏁 Misi Selesai!</h3><div class="big">${G.sc}</div><p>Skor akhir (maksimum sekitar 15 × (10 + 5·3 + waktu) — makin cepat makin tinggi).</p><button class="btn" onclick="gBegin()">MAIN LAGI</button>`}else gNew()},1800)}
+$('#gsv').addEventListener('pointerdown',e=>{if(!G.run||G.ans)return;const r=$('#gsv').getBoundingClientRect(),x=Math.round(((e.clientX-r.left)/r.width*480-240)/30),y=Math.round((240-(e.clientY-r.top)/r.height*480)/30);gEnd([Math.max(-8,Math.min(8,x)),Math.max(-8,Math.min(8,y))])});
+
+/* ===== Profil ===== */
+$('#pgrid').innerHTML=[['De Chika Desiyana',7],['Dwi Dzaky Dhaifullah',9],['Dyah Sekar Hazrina',10],['Fadhil Azka Ramadhan',12],['Firaza Sakha Adzfary',15],['Inesa Hestiani',16],['Muhammad Arif Nurohim',21],['Nazla Zikri Thantria',24],['Restia Andini Putri',32]].map(m=>`<div class="card pf"><div class="av">${m[0].split(' ').slice(0,2).map(w=>w[0]).join('')}</div><b>${m[0]}</b><p class="small">Absen ${m[1]} • Kelompok 4 XI.2</p></div>`).join('');
+</script></body></html>
